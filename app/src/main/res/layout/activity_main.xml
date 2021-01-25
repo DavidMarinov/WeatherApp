@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.david.weatherapp.ui.home.HomeViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.MainActivity">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:cityName="@{viewModel.currentWeatherLiveData.cityName}"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_marginTop="16dp"
+            android:id="@+id/cityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintTop_toBottomOf="@id/searchView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@{viewModel.currentWeatherLiveData.cityName}"
+            tools:text="Skopje" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/weatherTemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="@id/weatherIcon"
+            app:layout_constraintEnd_toStartOf="@id/weatherIcon"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/weatherIcon"
+            android:text="@{String.valueOf(viewModel.currentWeatherLiveData.temp) + `°C`}"
+            tools:text="22c" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_marginTop="24sp"
+            android:weatherIcon="@{viewModel.currentWeatherLiveData.weatherIcon}"
+            android:id="@+id/weatherIcon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/weatherTemperature"
+            app:layout_constraintTop_toBottomOf="@id/cityName"
+             />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/weatherDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textStyle="bold|italic"
+            android:text="@{viewModel.currentWeatherLiveData.weatherDescription}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weatherIcon" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/minWeatherTemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toStartOf="@id/maxWeatherTemperature"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weatherDescription"
+            android:text="@{`Min: ` + String.valueOf(viewModel.currentWeatherLiveData.minTemp)  + `°C`}"
+            tools:text="Min: 22c" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/maxWeatherTemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold|italic"
+            android:text="@{`Max: ` + String.valueOf(viewModel.currentWeatherLiveData.maxTemp)  + `°C`}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/minWeatherTemperature"
+            app:layout_constraintTop_toBottomOf="@id/weatherDescription"
+            tools:text="Max: 22c" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
